@@ -18,7 +18,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Hide scrollbar for poster */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -131,15 +130,15 @@
                     TOP MATCH
                 </div>
                 <div class="text-center mt-4 mb-6">
-                    <div class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500 font-black text-6xl mb-2" id="top-match-percent">99%</div>
+                    <div class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500 font-black text-6xl" id="top-match-percent">99%</div>
                     
-                    <div class="text-slate-400 text-sm font-medium tracking-widest uppercase mb-0">契合度</div>
+                    <div class="text-slate-400 text-sm font-medium tracking-widest uppercase mt-3 mb-2">契合度</div>
                     
-                    <h2 class="text-4xl font-bold text-slate-800 -mt-4 mb-1" id="top-match-city">城市名</h2>
+                    <h2 class="text-4xl font-bold text-slate-800 leading-none mb-3" id="top-match-city">城市名</h2>
                     
-                    <div class="inline-block bg-teal-100 text-teal-600 px-4 py-1.5 rounded-full text-lg font-bold mb-10" id="top-match-title">人设头衔</div>
+                    <div class="inline-flex items-center bg-teal-100 text-teal-600 px-4 py-2 rounded-full text-lg font-bold mb-8" style="box-shadow: 0 10px 20px rgba(0,0,0,0.15);" id="top-match-title">人设头衔</div>
                     
-                    <div id="top-match-zodiac" class="text-slate-500 text-sm mt-6 mb-6">星座：未知</div>
+                    <div id="top-match-zodiac" class="text-slate-500 text-sm mb-4">星座：未知</div>
                     
                     <div class="text-center mb-4" id="top-match-user-tags"></div>
                     <div class="text-center mb-6" id="top-match-city-tags"></div>
@@ -172,7 +171,7 @@
         <div class="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white/80 to-transparent flex justify-center max-w-md mx-auto gap-3">
             <button id="save-btn" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-200 transition-all active:scale-95 flex items-center justify-center gap-2 text-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                下载结果
+                保存本地
             </button>
             <button id="share-btn" class="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-200 transition-all active:scale-95 flex items-center justify-center gap-2 text-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
@@ -181,12 +180,14 @@
         </div>
     </div>
 
-    <div id="share-overlay" class="fixed inset-0 z-[9999] bg-black/80 hide flex-col items-end pr-8 pt-10 cursor-pointer transition-opacity" onclick="this.classList.add('hide'); this.style.display='';">
-        <div class="text-white text-right animate-bounce">
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto mb-3"><path d="M7 7h10v10"/><path d="M17 7 3 21"/></svg>
-            <div class="text-2xl font-bold mb-2 tracking-widest">点击右上角 ···</div>
-            <div class="text-lg">分享给朋友或朋友圈</div>
+    <div id="share-image-overlay" class="fixed inset-0 z-[10000] bg-black/90 hide flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-300">
+        <div class="text-white text-sm mb-4 bg-white/20 px-5 py-2.5 rounded-full backdrop-blur-md border border-white/30 animate-bounce flex items-center gap-2">
+            <span>👇</span> 长按下方图片发送给朋友或发朋友圈
         </div>
+        <img id="share-preview-img" class="w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border border-white/10" src="" alt="分享预览图">
+        <button onclick="closeShareOverlay()" class="mt-6 bg-white/20 hover:bg-white/30 text-white rounded-full p-3 backdrop-blur-md transition-all active:scale-90">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
     </div>
 
 </div>
@@ -241,7 +242,7 @@
     "text": "选一个地方散步，你更偏爱：",
     "options": [
       { "text": "☕ 梧桐树下的精致咖啡街区", "scores": { "type_1": 5, "type_2": 0, "type_3": 0, "type_4": 10 } },
-      { "text": "🌊 视野开阔、风复杂的江海边", "scores": { "type_1": 10, "type_2": 5, "type_3": 0, "type_4": 0 } },
+      { "text": "🌊 视野开阔、风很大的江海边", "scores": { "type_1": 10, "type_2": 5, "type_3": 0, "type_4": 0 } },
       { "text": "🧱 充满历史底蕴的红墙古城", "scores": { "type_1": 0, "type_2": 0, "type_3": 5, "type_4": 10 } },
       { "text": "🌲 郁郁葱葱、空气湿润的山林", "scores": { "type_1": 0, "type_2": 10, "type_3": 5, "type_4": 0 } }
     ]
@@ -290,7 +291,7 @@
     "id": 10,
     "text": "什么最能给你带来“家”的归属感？",
     "options": [
-      { "text": "🏆 事业成就和互相启启发券", "scores": { "type_1": 10, "type_2": 0, "type_3": 0, "type_4": 5 } },
+      { "text": "🏆 事业成就和互相启发的圈子", "scores": { "type_1": 10, "type_2": 0, "type_3": 0, "type_4": 5 } },
       { "text": "🏪 楼下亮着灯的便利店或深夜食堂", "scores": { "type_1": 0, "type_2": 0, "type_3": 10, "type_4": 0 } },
       { "text": "🐾 一只粘人小猫和温暖的床", "scores": { "type_1": 0, "type_2": 10, "type_3": 5, "type_4": 0 } },
       { "text": "🏞️ 推开窗就能看到山川湖海", "scores": { "type_1": 0, "type_2": 10, "type_3": 0, "type_4": 5 } }
@@ -702,48 +703,41 @@
     const OFFICIAL_URL = 'https://www.206288.xyz/';
     const AUTH_VALIDATE_API = 'https://api.206288.xyz/validate';
 
-    let birthdayInfo = {
-        month: null,
-        day: null,
-        zodiac: ''
-    };
-    let mbtiInfo = {
-        code: '',
-        trait: ''
-    };
+    let birthdayInfo = { month: null, day: null, zodiac: '' };
+    let mbtiInfo = { code: '', trait: '' };
 
     const zodiacProfiles = {
         '白羊座': {trait: '行动力强、热情果断', boosts: {type_1: 2, type_3: 1}},
-        '金牛座': {trait: '稳定务实、重视安全感', boosts: {type_2: 2, type_1: 1}},
-        '双子座': {trait: '好奇灵活、热爱交流', boosts: {type_3: 2, type_4: 1}},
-        '巨蟹座': {trait: '重情感与归属、细腻敏感', boosts: {type_2: 2, type_4: 1}},
-        '狮子座': {trait: '自信外放、目标驱动', boosts: {type_1: 2, type_3: 1}},
-        '处女座': {trait: '理性细致、追求秩序', boosts: {type_1: 2, type_4: 1}},
-        '天秤座': {trait: '平衡审美、社交感强', boosts: {type_3: 2, type_4: 1}},
-        '天蝎座': {trait: '洞察力强、深度导向', boosts: {type_4: 2, type_1: 1}},
-        '射手座': {trait: '自由探索、开放外向', boosts: {type_3: 2, type_2: 1}},
-        '摩羯座': {trait: '目标清晰、长期主义', boosts: {type_1: 2, type_2: 1}},
-        '水瓶座': {trait: '独立创新、前瞻思维', boosts: {type_4: 2, type_3: 1}},
-        '双鱼座': {trait: '共情力高、想象力丰富', boosts: {type_2: 2, type_4: 1}}
+        '金牛座': {trait: '务实且稳重', boosts: {type_2: 2, type_1: 1}},
+        '双子座': {trait: '灵活且热爱交流', boosts: {type_3: 2, type_4: 1}},
+        '巨蟹座': {trait: '细腻且重归属感', boosts: {type_2: 2, type_4: 1}},
+        '狮子座': {trait: '自信且目标驱动', boosts: {type_1: 2, type_3: 1}},
+        '处女座': {trait: '理性且追求秩序', boosts: {type_1: 2, type_4: 1}},
+        '天秤座': {trait: '拥有平衡与审美', boosts: {type_3: 2, type_4: 1}},
+        '天蝎座': {trait: '极具深度与洞察力', boosts: {type_4: 2, type_1: 1}},
+        '射手座': {trait: '热爱自由与探索', boosts: {type_3: 2, type_2: 1}},
+        '摩羯座': {trait: '充满长期主义的韧性', boosts: {type_1: 2, type_2: 1}},
+        '水瓶座': {trait: '前卫且独立创新', boosts: {type_4: 2, type_3: 1}},
+        '双鱼座': {trait: '拥有极高共情与想象力', boosts: {type_2: 2, type_4: 1}}
     };
 
     const mbtiProfiles = {
-        INTJ: {trait: '战略清晰、独立判断', boosts: {type_1: 3, type_4: 2}},
-        INTP: {trait: '理性分析、思维跳跃', boosts: {type_4: 3, type_1: 1}},
-        ENTJ: {trait: '执行强势、目标导向', boosts: {type_1: 3, type_3: 2}},
-        ENTP: {trait: '创意辩证、探索驱动', boosts: {type_3: 2, type_4: 2}},
-        INFJ: {trait: '洞察深层、价值驱动', boosts: {type_4: 3, type_2: 1}},
-        INFP: {trait: '理想主义、重情感真实', boosts: {type_2: 2, type_4: 2}},
-        ENFJ: {trait: '共情领导、关注连接', boosts: {type_3: 2, type_2: 2}},
-        ENFP: {trait: '热情表达、灵感充沛', boosts: {type_3: 2, type_4: 2}},
-        ISTJ: {trait: '稳健可靠、规则意识强', boosts: {type_1: 2, type_2: 2}},
-        ISFJ: {trait: '温和细致、责任感高', boosts: {type_2: 3, type_1: 1}},
-        ESTJ: {trait: '组织高效、务实管理', boosts: {type_1: 3, type_3: 1}},
-        ESFJ: {trait: '重协作、重关系与秩序', boosts: {type_3: 2, type_2: 2}},
-        ISTP: {trait: '冷静实操、灵活应变', boosts: {type_1: 2, type_4: 1}},
-        ISFP: {trait: '审美敏感、随性真实', boosts: {type_2: 2, type_4: 1}},
-        ESTP: {trait: '行动迅速、现实导向', boosts: {type_3: 2, type_1: 2}},
-        ESFP: {trait: '体验派、社交感染力强', boosts: {type_3: 2, type_2: 2}}
+        INTJ: {trait: '独立判断的战略家', boosts: {type_1: 3, type_4: 2}},
+        INTP: {trait: '思维跳跃的逻辑分析师', boosts: {type_4: 3, type_1: 1}},
+        ENTJ: {trait: '目标导向的强势指挥官', boosts: {type_1: 3, type_3: 2}},
+        ENTP: {trait: '辩证探索的创意达人', boosts: {type_3: 2, type_4: 2}},
+        INFJ: {trait: '洞察深层意义的提倡者', boosts: {type_4: 3, type_2: 1}},
+        INFP: {trait: '追求情感真实的理想主义', boosts: {type_2: 2, type_4: 2}},
+        ENFJ: {trait: '关注深层连接的共情领导者', boosts: {type_3: 2, type_2: 2}},
+        ENFP: {trait: '灵感充沛的热情表达者', boosts: {type_3: 2, type_4: 2}},
+        ISTJ: {trait: '稳健可靠的秩序维护者', boosts: {type_1: 2, type_2: 2}},
+        ISFJ: {trait: '温和细致的责任担当者', boosts: {type_2: 3, type_1: 1}},
+        ESTJ: {trait: '组织高效的务实管理者', boosts: {type_1: 3, type_3: 1}},
+        ESFJ: {trait: '重视协作与关系的守护者', boosts: {type_3: 2, type_2: 2}},
+        ISTP: {trait: '冷静灵活的现实应变者', boosts: {type_1: 2, type_4: 1}},
+        ISFP: {trait: '审美敏锐的随性艺术家', boosts: {type_2: 2, type_4: 1}},
+        ESTP: {trait: '行动迅速的现实破局者', boosts: {type_3: 2, type_1: 2}},
+        ESFP: {trait: '社交感染力极强的体验派', boosts: {type_3: 2, type_2: 2}}
     };
 
     function toHalfWidth(rawText) {
@@ -753,12 +747,7 @@
     }
 
     function normalizeAuthCode(rawCode) {
-        return toHalfWidth(rawCode)
-            .replace(/^\uFEFF/, '')
-            .toUpperCase()
-            .replace(/[\s-]+/g, '')
-            .replace(/[^A-Z0-9]/g, '')
-            .trim();
+        return toHalfWidth(rawCode).replace(/^\uFEFF/, '').toUpperCase().replace(/[\s-]+/g, '').replace(/[^A-Z0-9]/g, '').trim();
     }
 
     function getMaxDay(month) {
@@ -809,9 +798,7 @@
             })
         });
         
-        if (!res.ok) {
-            throw new Error('validate_failed');
-        }
+        if (!res.ok) throw new Error('validate_failed');
         return await res.json();
     }
 
@@ -819,7 +806,6 @@
         wechatQrImage.classList.add('hide');
     });
 
-    // --- Logic ---
     startBtn.addEventListener('click', () => {
         homeScreen.classList.add('hide');
         profileScreen.classList.remove('hide');
@@ -849,15 +835,8 @@
             mbtiInput.focus();
             return;
         }
-        birthdayInfo = {
-            month,
-            day,
-            zodiac: getZodiac(month, day)
-        };
-        mbtiInfo = {
-            code: mbtiCode,
-            trait: mbtiProfiles[mbtiCode].trait
-        };
+        birthdayInfo = { month, day, zodiac: getZodiac(month, day) };
+        mbtiInfo = { code: mbtiCode, trait: mbtiProfiles[mbtiCode].trait };
         profileScreen.classList.add('hide');
         questionScreen.classList.remove('hide');
         renderQuestion();
@@ -866,11 +845,8 @@
     prevBtn.addEventListener('click', () => {
         if (currentQuestionIndex > 0) {
             const lastScores = scoreHistory.pop();
-            for (const key in lastScores) {
-                scores[key] -= lastScores[key];
-            }
+            for (const key in lastScores) { scores[key] -= lastScores[key]; }
             currentQuestionIndex--;
-            
             optionsContainer.style.opacity = '0';
             questionText.style.opacity = '0';
             setTimeout(() => {
@@ -883,33 +859,21 @@
 
     unlockBtn.addEventListener('click', async () => {
         const code = normalizeAuthCode(authCodeInput.value);
-        if (!code) {
-            alert('请输入授权码');
-            return;
-        }
+        if (!code) { alert('请输入授权码'); return; }
         
         unlockBtn.disabled = true;
         unlockBtn.innerHTML = '校验中...';
 
         try {
             const data = await validateAuthCode(code);
-            
             if (data && data.valid) {
-                if (data.deviceId) {
-                    localStorage.setItem(`device_id_${code}`, data.deviceId);
-                }
-                
+                if (data.deviceId) localStorage.setItem(`device_id_${code}`, data.deviceId);
                 authScreen.classList.add('hide');
                 resultScreen.classList.remove('hide');
             } else {
-                if (data && data.error === 'device_mismatch') {
-                    alert('抱歉，该授权码已在其他设备或浏览器上激活，禁止共享。');
-                } else if (data && data.expired) {
-                    alert('该授权码已超过24小时有效期，请重新获取');
-                } else {
-                    alert('授权码未通过校验，请检查后重试');
-                }
-                
+                if (data && data.error === 'device_mismatch') alert('抱歉，该授权码已在其他设备或浏览器上激活，禁止共享。');
+                else if (data && data.expired) alert('该授权码已超过24小时有效期，请重新获取');
+                else alert('授权码未通过校验，请检查后重试');
                 authCodeInput.value = '';
                 authCodeInput.focus();
             }
@@ -927,11 +891,8 @@
         progressBar.style.width = `${((currentQuestionIndex) / questions.length) * 100}%`;
         questionText.textContent = q.text;
         
-        if (currentQuestionIndex > 0) {
-            prevBtn.classList.remove('hide');
-        } else {
-            prevBtn.classList.add('hide');
-        }
+        if (currentQuestionIndex > 0) prevBtn.classList.remove('hide');
+        else prevBtn.classList.add('hide');
         
         optionsContainer.innerHTML = '';
         const labels = ['A', 'B', 'C', 'D'];
@@ -955,11 +916,8 @@
     }
 
     function handleOptionClick(optionScores) {
-        for (const key in optionScores) {
-            scores[key] += optionScores[key];
-        }
+        for (const key in optionScores) scores[key] += optionScores[key];
         scoreHistory.push(optionScores);
-
         currentQuestionIndex++;
         
         if (currentQuestionIndex < questions.length) {
@@ -981,23 +939,17 @@
         authScreen.classList.remove('hide');
 
         const mergedScores = {...scores};
+        // 星座和MBTI实际参与底层打分计算
         const zodiacProfile = zodiacProfiles[birthdayInfo.zodiac];
-        if (zodiacProfile) {
-            applyBoost(mergedScores, zodiacProfile.boosts);
-        }
-        if (mbtiInfo.code && mbtiProfiles[mbtiInfo.code]) {
-            applyBoost(mergedScores, mbtiProfiles[mbtiInfo.code].boosts);
-        }
+        if (zodiacProfile) applyBoost(mergedScores, zodiacProfile.boosts);
+        if (mbtiInfo.code && mbtiProfiles[mbtiInfo.code]) applyBoost(mergedScores, mbtiProfiles[mbtiInfo.code].boosts);
+        
         const sortedTypes = Object.entries(mergedScores).sort((a, b) => b[1] - a[1]);
         const top1 = sortedTypes[0][0];
         const top2 = sortedTypes[1][0];
         
         let resultKey = `${top1}_${top2}`;
-        
-        if (!cityResults[resultKey]) {
-            resultKey = `${top2}_${top1}`;
-        }
-        
+        if (!cityResults[resultKey]) resultKey = `${top2}_${top1}`;
         const resultData = cityResults[resultKey] || Object.values(cityResults)[0];
         
         renderResult(resultData);
@@ -1015,62 +967,67 @@
         document.getElementById('top-match-zodiac').textContent = birthdayInfo.zodiac
             ? `生日：${birthdayInfo.month}月${birthdayInfo.day}日 · 星座：${birthdayInfo.zodiac} · MBTI：${mbtiInfo.code || '未知'}`
             : `星座：未知 · MBTI：${mbtiInfo.code || '未知'}`;
-        const zodiacTrait = zodiacProfiles[birthdayInfo.zodiac]?.trait || '个性特征鲜明';
-        const mbtiTrait = mbtiInfo.trait || '人格倾向稳定';
-        document.getElementById('top-match-reason').textContent = `${topMatch.reason} 同时，你的${birthdayInfo.zodiac}${zodiacTrait}，以及${mbtiInfo.code}的${mbtiTrait}，与这座城市的气质和生活方式形成了额外共振，这也是匹配度更高的重要原因之一。`;
+
+        // ==========================================
+        // 核心修改：生成极具“巴纳姆效应”的前缀句，并无缝融入正文
+        // ==========================================
+        const zodiacTrait = zodiacProfiles[birthdayInfo.zodiac]?.trait || '';
+        const mbtiTrait = mbtiInfo.trait || '';
+        
+        let introSentence = '';
+        if (birthdayInfo.zodiac && mbtiInfo.code) {
+            introSentence = `作为${birthdayInfo.zodiac}，你骨子里有着${zodiacTrait}的特质；而 ${mbtiInfo.code} 的人格底色，又赋予了你${mbtiTrait}的天赋。`;
+        } else if (birthdayInfo.zodiac) {
+            introSentence = `作为${birthdayInfo.zodiac}，你骨子里有着${zodiacTrait}的特质。`;
+        } else if (mbtiInfo.code) {
+            introSentence = `作为 ${mbtiInfo.code}，你天生具有${mbtiTrait}的天赋。`;
+        }
+        
+        // 将分析前缀加粗高亮，并与原有的城市描述无缝拼接
+        const finalReasonHTML = introSentence 
+            ? `<span class="font-bold text-emerald-600 block mb-2">${introSentence}</span><span class="text-slate-600 leading-relaxed">${topMatch.reason}</span>` 
+            : `<span class="text-slate-600 leading-relaxed">${topMatch.reason}</span>`;
+            
+        document.getElementById('top-match-reason').innerHTML = finalReasonHTML;
 
         const createTag = (text, bgClass, textClass) => {
             const span = document.createElement('span');
-            span.className = `inline-block px-3 py-1.5 ${bgClass} ${textClass} rounded-full text-xs font-medium m-1`;
+            span.className = `inline-flex items-center px-3 py-1.5 ${bgClass} ${textClass} rounded-full text-xs font-medium m-1`;
             span.textContent = text;
             return span;
         };
 
         const userTagsContainer = document.getElementById('top-match-user-tags');
         userTagsContainer.innerHTML = '';
-        if (birthdayInfo.zodiac) {
-            userTagsContainer.appendChild(createTag(`星座：${birthdayInfo.zodiac}`, 'bg-emerald-50', 'text-emerald-600'));
-        }
-        if (mbtiInfo.code) {
-            userTagsContainer.appendChild(createTag(`MBTI：${mbtiInfo.code}`, 'bg-emerald-50', 'text-emerald-600'));
-        }
-        topMatch.userTags.forEach(tag => {
-            userTagsContainer.appendChild(createTag(tag, 'bg-emerald-50', 'text-emerald-600'));
-        });
+        if (birthdayInfo.zodiac) userTagsContainer.appendChild(createTag(`星座：${birthdayInfo.zodiac}`, 'bg-emerald-50', 'text-emerald-600'));
+        if (mbtiInfo.code) userTagsContainer.appendChild(createTag(`MBTI：${mbtiInfo.code}`, 'bg-emerald-50', 'text-emerald-600'));
+        topMatch.userTags.forEach(tag => userTagsContainer.appendChild(createTag(tag, 'bg-emerald-50', 'text-emerald-600')));
 
         const cityTagsContainer = document.getElementById('top-match-city-tags');
         cityTagsContainer.innerHTML = '';
-        topMatch.cityTags.forEach(tag => {
-            cityTagsContainer.appendChild(createTag(tag, 'bg-teal-50', 'text-teal-600'));
-        });
+        topMatch.cityTags.forEach(tag => cityTagsContainer.appendChild(createTag(tag, 'bg-teal-50', 'text-teal-600')));
         
         document.getElementById('top-match-avoid-type').innerHTML = `<span class="inline-block mr-1">⚠️</span>${topMatch.avoidType}`;
         const avoidCitiesContainer = document.getElementById('top-match-avoid-cities');
-        avoidCitiesContainer.innerHTML = topMatch.avoidCities.map(city => 
-            `<span class="inline-block bg-red-100 text-red-700 px-3 py-1.5 rounded-full text-xs font-medium mr-2 mb-2">${city}</span>`
-        ).join('');
+        avoidCitiesContainer.innerHTML = topMatch.avoidCities.map(city => `<span class="inline-flex items-center bg-red-100 text-red-700 px-3 py-1.5 rounded-full text-xs font-medium mr-2 mb-2">${city}</span>`).join('');
 
         const runnerUpsContainer = document.getElementById('runner-ups-container');
         runnerUpsContainer.innerHTML = '';
         
         runnerUps.forEach((city) => {
             currentPercent -= (Math.floor(Math.random() * 3) + 1);
-            
             const card = document.createElement('div');
             card.className = 'bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3';
             
             const header = document.createElement('div');
             header.className = 'flex justify-between items-center';
-            header.innerHTML = `
-                <span class="font-bold text-slate-800 text-lg">${city.city}</span>
-                <span class="text-emerald-500 font-bold">${currentPercent}%</span>
-            `;
+            header.innerHTML = `<span class="font-bold text-slate-800 text-lg">${city.city}</span><span class="text-emerald-500 font-bold">${currentPercent}%</span>`;
             
             const tagsDiv = document.createElement('div');
             tagsDiv.className = 'block mt-1'; 
             city.tags.forEach(tag => {
                 const t = document.createElement('span');
-                t.className = 'inline-block px-2 py-0.5 bg-slate-50 text-slate-500 rounded-md text-[10px] font-medium mr-1.5 mb-1.5';
+                t.className = 'inline-flex items-center px-2 py-0.5 bg-slate-50 text-slate-500 rounded-md text-[10px] font-medium mr-1.5 mb-1.5';
                 t.textContent = tag;
                 tagsDiv.appendChild(t);
             });
@@ -1082,61 +1039,61 @@
             card.appendChild(header);
             card.appendChild(tagsDiv);
             card.appendChild(desc);
-            
             runnerUpsContainer.appendChild(card);
         });
     }
 
-    saveBtn.addEventListener('click', async () => {
+    async function generateScreenshotDataUrl() {
         const poster = document.getElementById('poster');
-        const previousScrollY = window.scrollY;
+        window.scrollTo({top: 0, behavior: 'instant'});
+        await new Promise(resolve => setTimeout(resolve, 300));
         
+        const clone = poster.cloneNode(true);
+        const percentEl = clone.querySelector('#top-match-percent');
+        if (percentEl) {
+            percentEl.classList.remove('text-transparent', 'bg-clip-text', 'bg-gradient-to-r', 'from-emerald-500', 'to-teal-500');
+            percentEl.classList.add('text-emerald-500'); 
+        }
+
+        clone.style.position = 'absolute';
+        clone.style.top = '0';
+        clone.style.left = '0';
+        clone.style.zIndex = '-9999'; 
+        clone.style.width = poster.offsetWidth + 'px';
+        clone.style.height = 'max-content'; 
+        clone.style.overflow = 'visible';
+        
+        document.body.appendChild(clone);
+        
+        const realHeight = clone.scrollHeight;
+        const realWidth = clone.offsetWidth;
+
+        const canvas = await html2canvas(clone, {
+            scale: 2, 
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ecfdf5',
+            width: realWidth,
+            height: realHeight,
+            windowWidth: realWidth,
+            windowHeight: realHeight,
+            scrollY: 0,
+            scrollX: 0,
+            x: 0,
+            y: 0
+        });
+        
+        document.body.removeChild(clone);
+        return canvas.toDataURL('image/png');
+    }
+
+    saveBtn.addEventListener('click', async () => {
+        const previousScrollY = window.scrollY;
         saveBtn.innerHTML = '生成中...';
         saveBtn.disabled = true;
         
         try {
-            window.scrollTo({top: 0, behavior: 'instant'});
-            await new Promise(resolve => setTimeout(resolve, 300));
-            
-            const clone = poster.cloneNode(true);
-            
-            const percentEl = clone.querySelector('#top-match-percent');
-            if (percentEl) {
-                percentEl.classList.remove('text-transparent', 'bg-clip-text', 'bg-gradient-to-r', 'from-emerald-500', 'to-teal-500');
-                percentEl.classList.add('text-emerald-500'); 
-            }
-
-            clone.style.position = 'absolute';
-            clone.style.top = '0';
-            clone.style.left = '0';
-            clone.style.zIndex = '-9999'; 
-            clone.style.width = poster.offsetWidth + 'px';
-            clone.style.height = 'max-content'; 
-            clone.style.overflow = 'visible';
-            
-            document.body.appendChild(clone);
-            
-            const realHeight = clone.scrollHeight;
-            const realWidth = clone.offsetWidth;
-
-            const canvas = await html2canvas(clone, {
-                scale: 2, 
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#ecfdf5',
-                width: realWidth,
-                height: realHeight,
-                windowWidth: realWidth,
-                windowHeight: realHeight,
-                scrollY: 0,
-                scrollX: 0,
-                x: 0,
-                y: 0
-            });
-            
-            document.body.removeChild(clone);
-            
-            const image = canvas.toDataURL('image/png');
+            const image = await generateScreenshotDataUrl();
             const link = document.createElement('a');
             link.download = '我的城市契合度测试.png';
             link.href = image;
@@ -1146,76 +1103,59 @@
             alert('海报生成失败，稍后再试一次');
         } finally {
             window.scrollTo({top: previousScrollY, behavior: 'instant'});
-            saveBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                下载结果
-            `;
+            saveBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>保存本地`;
             saveBtn.disabled = false;
         }
     });
 
-    // ==========================================
-    // 终极分享逻辑（兼容微信、QQ、现代浏览器与古董浏览器）
-    // ==========================================
     shareBtn.addEventListener('click', async () => {
-        const shareText = `我的本命城市契合度测试\n快来测测哪个中国城市最适合你！\n测试链接：${OFFICIAL_URL}`;
-        
-        // 1. 判断是否在微信/QQ等内置浏览器环境
-        const isWeChatOrQQ = /MicroMessenger|QQ/i.test(navigator.userAgent);
-        if (isWeChatOrQQ) {
-            const overlay = document.getElementById('share-overlay');
-            if (overlay) {
-                overlay.classList.remove('hide');
-                overlay.style.display = 'flex';
-            } else {
-                alert('请点击右上角 [...] 进行分享！');
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (isMobile && navigator.share) {
+            const cityName = document.getElementById('top-match-city').textContent;
+            try {
+                await navigator.share({
+                    title: '最适合你的中国城市测试',
+                    text: `我测出了我的天选之城是【${cityName}】！快来测测你最适合哪座城市 👇`,
+                    url: 'https://www.206288.xyz/'
+                });
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    console.error('Share failed:', err);
+                }
             }
             return;
         }
 
-        // 2. 现代手机浏览器环境：尝试呼出系统原生分享面板
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: '我的本命城市契合度测试',
-                    text: '快来测测哪个中国城市最适合你！',
-                    url: OFFICIAL_URL
-                });
-                return; // 调起成功则终止
-            } catch (err) {
-                console.log('原生分享面板被取消或不支持');
-            }
-        }
-
-        // 3. 终极兜底方案：暴力复制到剪贴板 (兼容 PC、无 HTTPS 环境)
+        const previousScrollY = window.scrollY;
+        shareBtn.innerHTML = '正在绘制分享图...';
+        shareBtn.disabled = true;
+        
         try {
-            if (navigator.clipboard && window.isSecureContext) {
-                // 优先使用现代 API
-                await navigator.clipboard.writeText(shareText);
-                alert('✨ 链接已复制成功！快去粘贴发给朋友吧！');
-            } else {
-                // 降级使用传统的 DOM 选择法，无视 HTTPS 限制
-                const textArea = document.createElement("textarea");
-                textArea.value = shareText;
-                textArea.style.position = "fixed"; // 防止页面滚动
-                textArea.style.top = "0";
-                textArea.style.left = "-999999px";
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    alert('✨ 链接已复制成功！快去粘贴发给朋友吧！');
-                } catch (e) {
-                    alert('复制失败，请手动复制网址：\n' + OFFICIAL_URL);
-                }
-                textArea.remove();
-            }
+            const image = await generateScreenshotDataUrl();
+            
+            document.getElementById('share-preview-img').src = image;
+            const overlay = document.getElementById('share-image-overlay');
+            
+            overlay.classList.remove('hide');
+            void overlay.offsetWidth; 
+            overlay.classList.remove('opacity-0');
+            
         } catch (err) {
-            // 极少数古董浏览器的最终防线
-            alert('复制失败，请手动复制网址：\n' + OFFICIAL_URL);
+            console.error('Share generation failed:', err);
+            alert('分享图绘制失败，请检查网络后重试');
+        } finally {
+            window.scrollTo({top: previousScrollY, behavior: 'instant'});
+            shareBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>分享给朋友`;
+            shareBtn.disabled = false;
         }
     });
+
+    function closeShareOverlay() {
+        const overlay = document.getElementById('share-image-overlay');
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.classList.add('hide'), 300);
+    }
 
 </script>
 </body>
