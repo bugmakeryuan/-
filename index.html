@@ -31,8 +31,8 @@
         <div class="bg-white/60 backdrop-blur-xl p-8 rounded-3xl shadow-xl shadow-emerald-100/50 text-center w-full border border-white/50">
             
             <div class="relative w-24 h-24 mx-auto mb-8">
-                <div class="absolute inset-0 bg-gradient-to-tr from-emerald-400 to-teal-300 rounded-[2rem] rotate-6 opacity-60 blur-xl animate-pulse"></div>
-                <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-[2rem] -rotate-3 shadow-2xl"></div>
+                <div class="absolute top-3 left-3 w-full h-full bg-gradient-to-tr from-emerald-400 to-teal-300 rounded-[2rem] rotate-6 opacity-60 blur-xl animate-pulse"></div>
+                <div class="absolute top-1 left-1 w-full h-full bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-[2rem] -rotate-3 shadow-2xl"></div>
                 <div class="relative flex items-center justify-center w-full h-full bg-white/20 backdrop-blur-md rounded-[2rem] border border-white/50 shadow-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white drop-shadow-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
@@ -133,13 +133,13 @@
                 <div class="text-center mt-4 mb-6">
                     <div class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500 font-black text-6xl mb-2" id="top-match-percent">99%</div>
                     
-                    <div class="text-slate-400 text-sm font-medium tracking-widest uppercase mb-1">契合度</div>
+                    <div class="text-slate-400 text-sm font-medium tracking-widest uppercase mb-0">契合度</div>
                     
-                    <h2 class="text-4xl font-bold text-slate-800 mb-2" id="top-match-city">城市名</h2>
+                    <h2 class="text-4xl font-bold text-slate-800 -mt-4 mb-1" id="top-match-city">城市名</h2>
                     
-                    <div class="inline-block bg-teal-100 text-teal-600 px-4 py-1.5 rounded-full text-lg font-bold mb-6" id="top-match-title">人设头衔</div>
+                    <div class="inline-block bg-teal-100 text-teal-600 px-4 py-1.5 rounded-full text-lg font-bold mb-10" id="top-match-title">人设头衔</div>
                     
-                    <div id="top-match-zodiac" class="text-slate-500 text-sm mb-6">星座：未知</div>
+                    <div id="top-match-zodiac" class="text-slate-500 text-sm mt-6 mb-6">星座：未知</div>
                     
                     <div class="text-center mb-4" id="top-match-user-tags"></div>
                     <div class="text-center mb-6" id="top-match-city-tags"></div>
@@ -178,6 +178,14 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                 分享给朋友
             </button>
+        </div>
+    </div>
+
+    <div id="share-overlay" class="fixed inset-0 z-[9999] bg-black/80 hide flex-col items-end pr-8 pt-10 cursor-pointer transition-opacity" onclick="this.classList.add('hide'); this.style.display='';">
+        <div class="text-white text-right animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-auto mb-3"><path d="M7 7h10v10"/><path d="M17 7 3 21"/></svg>
+            <div class="text-2xl font-bold mb-2 tracking-widest">点击右上角 ···</div>
+            <div class="text-lg">分享给朋友或朋友圈</div>
         </div>
     </div>
 
@@ -282,7 +290,7 @@
     "id": 10,
     "text": "什么最能给你带来“家”的归属感？",
     "options": [
-      { "text": "🏆 事业成就和互相启发的圈子", "scores": { "type_1": 10, "type_2": 0, "type_3": 0, "type_4": 5 } },
+      { "text": "🏆 事业成就和互相启启发券", "scores": { "type_1": 10, "type_2": 0, "type_3": 0, "type_4": 5 } },
       { "text": "🏪 楼下亮着灯的便利店或深夜食堂", "scores": { "type_1": 0, "type_2": 0, "type_3": 10, "type_4": 0 } },
       { "text": "🐾 一只粘人小猫和温暖的床", "scores": { "type_1": 0, "type_2": 10, "type_3": 5, "type_4": 0 } },
       { "text": "🏞️ 推开窗就能看到山川湖海", "scores": { "type_1": 0, "type_2": 10, "type_3": 0, "type_4": 5 } }
@@ -451,7 +459,7 @@
       { "city": "厦门", "tags": ["海上花园", "文艺清新", "慢享生活"], "desc": "用海风治愈职场内卷的鹭岛，既有特区的商业活力，又有让人瞬间松弛的文艺氛围。" },
       { "city": "威海", "tags": ["雪窝子", "绝美海岸", "宜居天花板"], "desc": "干净到让人忘记烦恼的北方海滨，适合在北方打拼但极度渴望宁静与治愈的灵魂。" },
       { "city": "烟台", "tags": ["仙境海岸", "葡萄酒城", "鲁菜之乡"], "desc": "喝着红酒吹海风的微醺之城，产业发达且生活安逸，能完美平衡你的野心与疲惫。" },
-      { "city": "大连", "tags": ["浪漫之都", "广场文化", "海鲜大排档"], "desc": "自带异国情调的北方避暑胜地，让你在北方也能享受到海滨城市的浪漫与松弛。" },
+      { "city": "大连", "tags": ["浪漫之都", "海鲜自由", "北方明珠"], "desc": "自带异国情调的北方避暑胜地，让你在北方也能享受到海滨城市的浪漫与松弛。" },
       { "city": "宁波", "tags": ["书藏古今", "港通天下", "隐形富豪"], "desc": "在东海之滨闷声发大财，既有硬核的港口经济，又有东钱湖畔的宁静致远。" },
       { "city": "舟山", "tags": ["海天佛国", "千岛之城", "海鲜大排档"], "desc": "在海岛上寻找内心的宁静，适合在长三角打拼、周末需要去海岛彻底放空的你。" },
       { "city": "海口", "tags": ["椰城风情", "慢节奏", "阳光沙滩"], "desc": "没有冬天只有椰林的避世特区，让你在温暖的阳光下卸下所有职场防备。" }
@@ -557,7 +565,7 @@
     },
     "runnerUps": [
       { "city": "重庆", "tags": ["8D魔幻", "雾都夜话", "赛博朋克"], "desc": "在魔幻地貌里吃最辣的火锅，这座城市的江湖气和拼搏精神能让你彻底释放野心。" },
-      { "city": "武汉", "tags": ["九省通衢", "过早文化", "江城江湖"], "desc": "端着热干面边走边吃的江湖气，高校林立且产业发达，适合充满朝气与野心的文化人。" },
+      { "city": "武汉", "tags": ["九省通衢", "过早文化", "江城江湖"], "desc": "端着热干面边走边吃的江湖气，适合性格直爽、做事雷厉风行且热爱市井生活的你。" },
       { "city": "南昌", "tags": ["英雄城", "拌粉瓦罐汤", "赣江风光"], "desc": "吃着拌粉搞事业的低调省会，这里的人们骨子里有着不服输的韧劲和对生活的热爱。" },
       { "city": "贵阳", "tags": ["避暑之都", "爽爽贵阳", "折耳根狂热"], "desc": "夏天不用开空调的吃货天堂，让你在享受清凉和美食的同时，也能抓住西南发展机遇。" },
       { "city": "合肥", "tags": ["霸都崛起", "科技创新", "淮军故里"], "desc": "在科技大厂旁吃地锅鸡的霸都，完美融合了硬核的科技野心与极具爆发力的市井文化。" },
@@ -1011,7 +1019,6 @@
         const mbtiTrait = mbtiInfo.trait || '人格倾向稳定';
         document.getElementById('top-match-reason').textContent = `${topMatch.reason} 同时，你的${birthdayInfo.zodiac}${zodiacTrait}，以及${mbtiInfo.code}的${mbtiTrait}，与这座城市的气质和生活方式形成了额外共振，这也是匹配度更高的重要原因之一。`;
 
-        // --- 排版修复 ---
         const createTag = (text, bgClass, textClass) => {
             const span = document.createElement('span');
             span.className = `inline-block px-3 py-1.5 ${bgClass} ${textClass} rounded-full text-xs font-medium m-1`;
@@ -1037,14 +1044,12 @@
             cityTagsContainer.appendChild(createTag(tag, 'bg-teal-50', 'text-teal-600'));
         });
         
-        // --- 表情和文本排版修复 ---
         document.getElementById('top-match-avoid-type').innerHTML = `<span class="inline-block mr-1">⚠️</span>${topMatch.avoidType}`;
         const avoidCitiesContainer = document.getElementById('top-match-avoid-cities');
         avoidCitiesContainer.innerHTML = topMatch.avoidCities.map(city => 
             `<span class="inline-block bg-red-100 text-red-700 px-3 py-1.5 rounded-full text-xs font-medium mr-2 mb-2">${city}</span>`
         ).join('');
 
-        // --- 城市列表排版修复 ---
         const runnerUpsContainer = document.getElementById('runner-ups-container');
         runnerUpsContainer.innerHTML = '';
         
@@ -1062,7 +1067,7 @@
             `;
             
             const tagsDiv = document.createElement('div');
-            tagsDiv.className = 'block mt-1'; // 弃用 flex
+            tagsDiv.className = 'block mt-1'; 
             city.tags.forEach(tag => {
                 const t = document.createElement('span');
                 t.className = 'inline-block px-2 py-0.5 bg-slate-50 text-slate-500 rounded-md text-[10px] font-medium mr-1.5 mb-1.5';
@@ -1082,7 +1087,6 @@
         });
     }
 
-    // --- 修改点：在克隆体中将渐变色文字强行替换为纯色，从而解决 html2canvas 无法识别 text-clip 的 Bug ---
     saveBtn.addEventListener('click', async () => {
         const poster = document.getElementById('poster');
         const previousScrollY = window.scrollY;
@@ -1096,18 +1100,12 @@
             
             const clone = poster.cloneNode(true);
             
-            // ==========================================
-            // 核心修复文字隐形 Bug 的代码
-            // ==========================================
             const percentEl = clone.querySelector('#top-match-percent');
             if (percentEl) {
-                // 剥离会导致隐形的渐变色和透明属性
                 percentEl.classList.remove('text-transparent', 'bg-clip-text', 'bg-gradient-to-r', 'from-emerald-500', 'to-teal-500');
-                // 换成纯净的深绿色（只在截图中生效，不影响原网页的美观）
                 percentEl.classList.add('text-emerald-500'); 
             }
 
-            // --- 克隆脱轨法排版 Bug 终极修复 ---
             clone.style.position = 'absolute';
             clone.style.top = '0';
             clone.style.left = '0';
@@ -1125,7 +1123,6 @@
                 scale: 2, 
                 useCORS: true,
                 allowTaint: true,
-                // --- 核心排版修复 3：下方城市列表也使用 inline-block，并将背景设为极浅绿色防止白边 ---
                 backgroundColor: '#ecfdf5',
                 width: realWidth,
                 height: realHeight,
@@ -1157,23 +1154,66 @@
         }
     });
 
-    // --- Share Logic ---
+    // ==========================================
+    // 终极分享逻辑（兼容微信、QQ、现代浏览器与古董浏览器）
+    // ==========================================
     shareBtn.addEventListener('click', async () => {
-        const shareData = {
-            title: '我的本命城市契合度测试',
-            text: '快来测测哪个中国城市最适合你！',
-            url: OFFICIAL_URL
-        };
+        const shareText = `我的本命城市契合度测试\n快来测测哪个中国城市最适合你！\n测试链接：${OFFICIAL_URL}`;
         
-        try {
-            if (navigator.share) {
-                await navigator.share(shareData);
+        // 1. 判断是否在微信/QQ等内置浏览器环境
+        const isWeChatOrQQ = /MicroMessenger|QQ/i.test(navigator.userAgent);
+        if (isWeChatOrQQ) {
+            const overlay = document.getElementById('share-overlay');
+            if (overlay) {
+                overlay.classList.remove('hide');
+                overlay.style.display = 'flex';
             } else {
-                await navigator.clipboard.writeText(OFFICIAL_URL);
-                alert('链接已复制，去朋友圈/小红书晒结果吧！');
+                alert('请点击右上角 [...] 进行分享！');
+            }
+            return;
+        }
+
+        // 2. 现代手机浏览器环境：尝试呼出系统原生分享面板
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: '我的本命城市契合度测试',
+                    text: '快来测测哪个中国城市最适合你！',
+                    url: OFFICIAL_URL
+                });
+                return; // 调起成功则终止
+            } catch (err) {
+                console.log('原生分享面板被取消或不支持');
+            }
+        }
+
+        // 3. 终极兜底方案：暴力复制到剪贴板 (兼容 PC、无 HTTPS 环境)
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                // 优先使用现代 API
+                await navigator.clipboard.writeText(shareText);
+                alert('✨ 链接已复制成功！快去粘贴发给朋友吧！');
+            } else {
+                // 降级使用传统的 DOM 选择法，无视 HTTPS 限制
+                const textArea = document.createElement("textarea");
+                textArea.value = shareText;
+                textArea.style.position = "fixed"; // 防止页面滚动
+                textArea.style.top = "0";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('✨ 链接已复制成功！快去粘贴发给朋友吧！');
+                } catch (e) {
+                    alert('复制失败，请手动复制网址：\n' + OFFICIAL_URL);
+                }
+                textArea.remove();
             }
         } catch (err) {
-            console.log('Share failed or cancelled', err);
+            // 极少数古董浏览器的最终防线
+            alert('复制失败，请手动复制网址：\n' + OFFICIAL_URL);
         }
     });
 
